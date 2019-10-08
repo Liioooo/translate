@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ionic serve",
-    "start:app": "ionic run android --livereload",
+    "start:app": "ionic cordova run android --livereload",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
