@@ -11,31 +11,32 @@
     <ion-grid>
       <ion-row>
         <ion-col size="5">
-          <ion-select placeholder="Select One">
-            <ion-select-option value="f">Female</ion-select-option>
-            <ion-select-option value="m">Male</ion-select-option>
+          <ion-select placeholder="Select One" [(ngModel)]="from" >
+            <ion-select-option *ngFor="let x of languages" value="{{x.short}}">{{x.lang}}</ion-select-option>
           </ion-select>
         </ion-col>
         <ion-col size="2" class="ion-justify-content-center ion-align-items-center" style="display: flex">
-          <ion-icon name="code"></ion-icon>
+          <ion-icon (click)="switchLanguages()" name="code"></ion-icon>
         </ion-col>
         <ion-col size="5">
-          <ion-select placeholder="Select One">
-            <ion-select-option value="f">Female</ion-select-option>
-            <ion-select-option value="m">Male</ion-select-option>
+          <ion-select placeholder="Select One" [(ngModel)]="to">
+            <ion-select-option *ngFor="let x of languages" value="{{x.short}}">{{x.lang}}</ion-select-option>
           </ion-select>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6" style="border: 1px solid black">
-          <ion-textarea rows="10" cols="20" placeholder="Enter Text..."></ion-textarea>
+          <ion-textarea [(ngModel)]="textIn" rows="10" cols="20" placeholder="Enter Text..."></ion-textarea>
         </ion-col>
         <ion-col size="6" style="border: 1px solid black">
-          <ion-textarea rows="10" cols="20" placeholder="Translation" readonly></ion-textarea>
+          <ion-textarea [(ngModel)]="textOut" rows="10" cols="20" placeholder="Translation" readonly></ion-textarea>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6" text-center>
+          <ion-button (click)="translate()">
+            translate
+          </ion-button>
           <ion-button>
             <ion-icon slot="start" name="volume-high"></ion-icon>
             Play
