@@ -11,11 +11,14 @@ export class HomePage {
     public textIn: string;
     public textOut: string;
     public languages: { lang: string, short: string }[];
-    private from = 'en';
-    private to = 'de';
+    public from = 'en';
+    public to = 'de';
 
     constructor(private translationService: TranslationService) {
-        this.translationService.getLanguages().subscribe(res => this.languages = res);
+        this.translationService.getLanguages().subscribe(res => {
+            this.languages = res;
+            this.switchLanguages();
+        });
     }
 
     public translate(): void {
@@ -30,6 +33,4 @@ export class HomePage {
         this.textIn = this.textOut;
         this.textOut = newOut;
     }
-
-
 }
