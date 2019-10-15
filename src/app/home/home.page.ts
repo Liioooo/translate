@@ -56,8 +56,11 @@ export class HomePage {
         this.mediaRecorder = new MediaRecorder(stream);
         this.mediaRecorder.start();
 
-        this.mediaRecorder.addEventListener('dataavailable', event => {
-            console.log(event);
+        this.mediaRecorder.addEventListener('dataavailable', async event => {
+            // @ts-ignore
+            const text = await this.translationService.speechToText(event.data).toPromise();
+            this.textIn = text;
+            this.translate();
         });
         this.recording = true;
     }

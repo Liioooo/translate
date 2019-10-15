@@ -39,7 +39,7 @@ export class TranslationService {
     }
 
     public textToSpeech(input: string): void {
-        this.http.post('https://stream-fra.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=de-DE_BirgitVoice', {
+        this.http.post('https://stream-fra.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=de-DE_DieterV3Voice', {
             text: input
         }, {
             responseType: 'blob',
