@@ -10,6 +10,16 @@ export class TranslationService {
 
     private url = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20191008T090358Z.45ed3146bf77ed4c.94615bd5d0e0af7036b92d8c78eeb90abfbb3522';
 
+    private voices = [
+        'en-US_MichaelV3Voice',
+        'pt-BR_IsabelaV3Voice',
+        'fr-FR_ReneeV3Voice',
+        'de-DE_DieterV3Voice',
+        'it-IT_FrancescaV3Voice',
+        'ja-JP_EmiV3Voice',
+        'es-ES_EnriqueV3Voice'
+    ];
+
     constructor(private http: HttpClient) {
     }
 
@@ -38,8 +48,8 @@ export class TranslationService {
         );
     }
 
-    public textToSpeech(input: string): void {
-        this.http.post('https://stream-fra.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=de-DE_BirgitVoice', {
+    public textToSpeech(input: string, voice: string): void {
+        this.http.post(`https://stream-fra.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=${voice}`, {
             text: input
         }, {
             responseType: 'blob',
@@ -77,5 +87,9 @@ export class TranslationService {
                 return 'This translator sucks!';
             }
         }));
+    }
+
+    public getVoice(language: string): string {
+        return this.voices.find(x => x.startsWith(language)) || this.voices[0];
     }
 }

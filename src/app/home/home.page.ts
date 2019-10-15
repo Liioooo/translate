@@ -53,6 +53,7 @@ export class HomePage {
             return;
         }
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        // @ts-ignore
         this.mediaRecorder = new MediaRecorder(stream);
         this.mediaRecorder.start();
 
