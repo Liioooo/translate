@@ -63,7 +63,7 @@ export class TranslationService {
     }
 
     public speechToText(input: Blob) {
-        this.http.post('https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize', null, {
+        this.http.post('https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize', input, {
             responseType: 'json',
             headers: new HttpHeaders({
                 'Content-Type': input.type,
