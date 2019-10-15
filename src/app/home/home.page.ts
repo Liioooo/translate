@@ -14,6 +14,9 @@ export class HomePage {
     public from = 'en';
     public to = 'de';
 
+    public recording = false;
+    private mediaRecorder: any;
+
     constructor(private translationService: TranslationService) {
         this.translationService.getLanguages().subscribe(res => {
             this.languages = res;
@@ -40,5 +43,22 @@ export class HomePage {
 
     public textToSpeechTo() {
         this.translationService.textToSpeech(this.textOut);
+    }
+
+    public async recordButtonClick() {
+        if (this.recording) {
+            this.recording = false;
+            this.mediaRecorder.stop();
+            delete this.mediaRecorder;
+            return;
+        }
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        this.mediaRecorder = new MediaRecorder(stream);
+        this.mediaRecorder.start();
+
+        this.mediaRecorder.addEventListener('dataavailable', event => {
+            console.log(event);
+        });
+        this.recording = true;
     }
 }
