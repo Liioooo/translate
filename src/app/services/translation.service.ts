@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -36,5 +36,29 @@ export class TranslationService {
                 return object;
             })
         );
+    }
+
+    public textToSpeech(input: string): void {
+        this.http.post('https://stream-fra.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=de-DE_BirgitVoice', {
+            text: input
+        }, {
+            responseType: 'blob',
+            headers: new HttpHeaders({
+                'Content-Type':  'application/json',
+                Authorization: 'Basic ' + btoa('apikey:HWKIs2fY05vaSlaJrYpwGaIqqJmp2BJ7B_0fOtLMDo80'),
+                Accept: 'audio/ogg'
+            })
+        }).subscribe((x) => {
+            const audioTag = document.createElement('audio');
+            const sourceTag = audioTag.appendChild(document.createElement('source'));
+            sourceTag.setAttribute('type', 'audio/ogg');
+            sourceTag.setAttribute('src', URL.createObjectURL(x));
+            document.body.insertBefore(audioTag, document.body.firstChild);
+            audioTag.load();
+            audioTag.onended = () => {
+                document.body.removeChild(audioTag);
+            };
+            audioTag.oncanplaythrough = () => audioTag.play();
+        });
     }
 }

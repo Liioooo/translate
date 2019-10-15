@@ -33,4 +33,12 @@ export class HomePage {
         this.textIn = this.textOut;
         this.textOut = newOut;
     }
+
+    public textToSpeechFrom() {
+        this.translationService.textToSpeech(this.textIn);
+    }
+
+    public textToSpeechTo() {
+        this.translationService.textToSpeech(this.textOut);
+    }
 }
