@@ -62,16 +62,20 @@ export class TranslationService {
         });
     }
 
-    public speechToText(input: Blob) {
-        this.http.post('https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize', input, {
+    public speechToText(input: Blob): Observable<string> {
+        return this.http.post('https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize', input, {
             responseType: 'json',
             headers: new HttpHeaders({
                 'Content-Type': input.type,
                 Authorization: 'Basic ' + btoa('apikey:ycqgY3NuUa9y3F68grcRsD_hbtbxAlz4jzrveUws48bh'),
                 Accept: 'application/json'
             })
-        }).subscribe(x => {
-            console.log(x);
-        });
+        }).pipe(map((r: any) => {
+            try {
+                return r.results[0].alternatives[0].transcript;
+            } catch (e) {
+                return 'This translator sucks!';
+            }
+        }));
     }
 }
