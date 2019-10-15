@@ -62,13 +62,13 @@ export class TranslationService {
         });
     }
 
-    public speechToText() {
+    public speechToText(input: Blob) {
         this.http.post('https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize', null, {
-            responseType: 'blob',
+            responseType: 'json',
             headers: new HttpHeaders({
-                'Content-Type': 'application/json',
+                'Content-Type': input.type,
                 Authorization: 'Basic ' + btoa('apikey:HWKIs2fY05vaSlaJrYpwGaIqqJmp2BJ7B_0fOtLMDo80'),
-                Accept: 'audio/ogg'
+                Accept: 'application/json'
             })
         }).subscribe(x => {
             console.log(x);
