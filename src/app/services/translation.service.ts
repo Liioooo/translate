@@ -67,7 +67,7 @@ export class TranslationService {
             responseType: 'json',
             headers: new HttpHeaders({
                 'Content-Type': input.type,
-                Authorization: 'Basic ' + btoa('apikey:HWKIs2fY05vaSlaJrYpwGaIqqJmp2BJ7B_0fOtLMDo80'),
+                Authorization: 'Basic ' + btoa('apikey:ycqgY3NuUa9y3F68grcRsD_hbtbxAlz4jzrveUws48bh'),
                 Accept: 'application/json'
             })
         }).subscribe(x => {
