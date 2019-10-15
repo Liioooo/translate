@@ -61,4 +61,17 @@ export class TranslationService {
             audioTag.oncanplaythrough = () => audioTag.play();
         });
     }
+
+    public speechToText() {
+        this.http.post('https://gateway-lon.watsonplatform.net/speech-to-text/api/v1/recognize', null, {
+            responseType: 'blob',
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Authorization: 'Basic ' + btoa('apikey:HWKIs2fY05vaSlaJrYpwGaIqqJmp2BJ7B_0fOtLMDo80'),
+                Accept: 'audio/ogg'
+            })
+        }).subscribe(x => {
+            console.log(x);
+        });
+    }
 }
